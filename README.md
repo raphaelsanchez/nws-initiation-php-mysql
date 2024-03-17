@@ -51,9 +51,9 @@ Il vous suffit de vous laisser guider par les commentaires pour comprendre ce qu
 ### Installation
 
 1. Ouvez votre serveur local
-2. Téléchargez le dossier `initiation-dev-web.zip`
+2. Téléchargez le dossier `nws-initiation-php-mysql--starter.zip`
 3. Cliquez sur le bouton `+` en bas à gauche de LocalWP et cliquez sur `Select an existing ZIP`
-4. Choisissez le fichier `initiation-dev-web.zip` précédement téléchargé et cliquez sur `Continue`
+4. Choisissez le fichier `nws-initiation-php-mysql--starter.zip` précédement téléchargé et cliquez sur `Continue`
 5. Choisissez un nom pour votre site et cliquez sur `Continue`
 6. Sélectionnez l'option `Preferred` et cliquez sur `Import site`
 7. Cliquez sur `View Site` pour voir votre site

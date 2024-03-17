@@ -4,8 +4,12 @@
  * ------------------------------
  * Nous devons donc, avant tout, nous connecter à la base de donnée.
  * Pour cela, on va inclure le fichier d'initialisation qui contient la connexion à la base de donnée.
+ * 
+ * On utilise la fonction include() pour inclure le fichier "db.php" qui contient la connexion à la base de donnée.
+ * Notez que le chemin du fichier est relatif à la position du fichier "action-newsletter-subscribe.php".
  */ 
 include "../includes/db.php";
+
 /**
  * PRÉPARATION DE LA REQUÊTE SQL
  * ------------------------------
@@ -51,8 +55,8 @@ $query->closeCursor();
  *
  * NOTE : dans un vrai projet, on redirigerai l'utilisateur vers une autre page...
  */
-echo "Votre adresse <strong>" . $sanitizedEmail . "</strong> a bien été enregistrée dans la base de donnée ! 🚀";
-echo "<br>";
+echo "L'adresse <strong>" . $sanitizedEmail . "</strong> a bien été enregistrée dans la base de donnée le <strong>" . date('Y-m-d H:i:s') . "</strong> ! 🚀";
+echo "<br><br>";
 echo "<a href='/merci.php?register=subscribers'>Aller à la page de remerciement</a>";
 
 /**
@@ -63,18 +67,20 @@ echo "<a href='/merci.php?register=subscribers'>Aller à la page de remerciement
 /**
 * REDIRECTION
 * ------------------------------
-* Cette fonction prend en paramettre "Location" en argument pour indiquer l'URL de la page de destination
+* La fonction header() prend en paramètre "Location" en argument pour indiquer l'URL de la page de destination
 * ex: header("Location: /merci.php");
-* on peut aussi passer des paramètres dans l'URL que l'on pourra récupérer avec $_GET
-* cela peut être utile pour afficher un message de confirmation par exemple
+*
+* On peut aussi passer des paramètres dans l'URL que l'on pourra récupérer avec $_GET dans la page de destination.
+* Cela peut être utile pour afficher un message de confirmation par exemple
 * ex: header("Location: /merci.php?register=subscribers");
 *
-* Décommenter la ligne ci-dessous commencant par // pour rediriger l'utilisateur vers la page de remerciement
+* Enlevez les // au début de la ligne ci-dessous pour rediriger l'utilisateur vers la page de remerciement
 */
 // header("Location: /merci.php?register=subscribers");
 
 /**
 * REMARQUES :
+* ------------------------------
 * Il s'agit ici d'un exemple très simple pour illustrer le principe de base de l'inscription à une newsletter.
 * Dans un vrai projet, on pourrait ajouter des fonctionnalités supplémentaires :
 * - vérifier que l'adresse email n'est pas déjà enregistrée dans la base de donnée

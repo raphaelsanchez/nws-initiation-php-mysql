@@ -18,26 +18,21 @@
  * Note: on utilise une fonction fléchée (ES6) pour définir la fonction de rappel
  */
 document.addEventListener("DOMContentLoaded", () => {
-  /* On affiche un message dans la console pour vérifier que le fichier est bien chargé (pas obligatoire, mais pratique pour le débug) */
+  /* On affiche un message dans la console pour vérifier que le fichier est bien chargé (pas obligatoire, mais pratique pour le débugger) */
   console.log("app.js chargé 🚀");
-  /* On appelle la fonction newslettersubscribe */
-  newslettersubscribe();
-  /* On appelle la fonction toggleThemeMode() */
+  /* On initialise la fonction newsletterSubscribe */
+  newsletterSubscribe();
+  /* On initialise aussi la fonction toggleThemeMode() */
   toggleThemeMode();
 });
 
 /**
  * Fonction qui gère le formulaire de newsletter
  *
- * Elle vérifie que l'email est valide et active le bouton d'envoi
- * si c'est le cas
- * (et désactive le bouton si l'email n'est pas valide)
- * Cette fonction est appelée dans l'event listener ci-dessus
- * pour être exécutée sur toutes les pages
- * (si le formulaire de newsletter est présent)
- * @returns {void}
+ * Cette fonction est appelée dans l'event listener ci-dessus si le formulaire de newsletter est présent.
+ * Elle permet de vérifier que l'email est valide et active le bouton d'envoi si c'est le cas.
  */
-function newslettersubscribe() {
+function newsletterSubscribe() {
   /* On cible le formulaire de newsletter grace à son id en utilisant querySelector() et on le stock dans une constante "newsletterForm" */
   const newsletterForm = document.querySelector("#newsletter-form");
 
@@ -51,7 +46,10 @@ function newslettersubscribe() {
   /* On récupère le bouton d'envoi et on le stock dans une constante "submitButton" */
   const submitButton = newsletterForm.querySelector("button[type=submit]");
 
-  /* on créé une function de rappel qui vérifie si l'email est valide */
+  /* On commence par désactiver le bouton d'envoi par défaut pour éviter l'envoi avant vérification du champ */
+  submitButton.disabled = true;
+
+  /* On créer une fonction de rappel qui vérifie si l'email est valide */
   function validate() {
     /* Si l'email est valide, on active le bouton d'envoi */
     if (validateEmail(emailInput.value)) {
@@ -62,16 +60,16 @@ function newslettersubscribe() {
     }
   }
 
-  /* On créé une fonction qui vérifie si l'email est valide */
+  /* On créé une fonction qui vérifie si l'email est valide grace à une RegExp */
   function validateEmail(email) {
-    const re = /\S+@\S+\.\S+/;
-    return re.test(email);
+    const regExp = /\S+@\S+\.\S+/;
+    return regExp.test(email);
   }
 
-  /** On pourrait imaginer d'autres fonctions de validation de champ ... */
+  /** On pourrait imaginer d'autres fonctions de validation de champ comme un âge minimum par exemple ... */
 
   /**
-   * On écoute l'événement "input", c'est à dire quand l'utilisateur tape du text, sur l'input de l'email
+   * Enfin, On écoute l'événement "input", c'est à dire quand l'utilisateur tape du text, sur l'input de l'email
    * et on appelle la fonction validate à chaque fois que l'événement est déclenché pour vérifier si l'email est valide
    */
   emailInput.addEventListener("input", validate);

@@ -7,8 +7,8 @@
  * Elles sont définies ici, au début du fichier, pour faciliter la maintenance du code.
  * Si on veut changer le titre du site, on le fait ici et il sera automatiquement mis à jour dans le fichier "partials/header.php"
  */
-$site_name = "Mon site";
-$site_author = "Raphael Sanchez";
+$meta_site_name = "Mon site";
+$meta_site_author = "Raphael Sanchez";
 ?> <!-- On oublie pas de fermer ici la balise PHP pour commencer à écrire du HTML -->
 
 <!DOCTYPE html>
@@ -17,17 +17,18 @@ $site_author = "Raphael Sanchez";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title><?php echo $page_title ?></title>
-  <meta name="description" content="<?php echo $page_description ?>">
-  <meta name="author" content="<?php echo $site_author ?>">
+  <title><?php echo $meta_title ?></title>
+  <meta name="description" content="<?php echo $meta_description ?>">
+  <meta name="author" content="<?php echo $meta_site_author ?>">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="<?php echo $page_title ?>">
-  <meta property="og:description" content="<?php echo $page_description ?>">
+  <meta property="og:title" content="<?php echo $meta_title ?>">
+  <meta property="og:description" content="<?php echo $meta_description ?>">
   <meta property="og:url" content="<?php echo $_SERVER['REQUEST_URI'] ?>">
 
   <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.orange.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css"/>
   <link rel="stylesheet" href="assets/styles/app.css">
 
   <script src="assets/scripts/app.js" defer></script>
@@ -45,3 +46,8 @@ $site_author = "Raphael Sanchez";
     </button>
   </nav>
 </header>
+
+<!-- 
+  Fin du partials/header.php
+  Le reste de notre code se trouve dans la page (ex. index.php) 
+-->

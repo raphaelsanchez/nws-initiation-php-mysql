@@ -50,10 +50,10 @@ Il vous suffit de vous laisser guider par les commentaires pour comprendre ce qu
 
 ### Installation
 
-1. Ouvez votre serveur local
-2. Téléchargez le dossier `initiation-dev-web.zip`
+1. Ouvrez votre serveur local
+2. Téléchargez le dossier `nws-initiation-php-mysql--starter.zip`
 3. Cliquez sur le bouton `+` en bas à gauche de LocalWP et cliquez sur `Select an existing ZIP`
-4. Choisissez le fichier `initiation-dev-web.zip` précédement téléchargé et cliquez sur `Continue`
+4. Choisissez le fichier `nws-initiation-php-mysql--starter.zip` précédemment téléchargé et cliquez sur `Continue`
 5. Choisissez un nom pour votre site et cliquez sur `Continue`
 6. Sélectionnez l'option `Preferred` et cliquez sur `Import site`
 7. Cliquez sur `View Site` pour voir votre site
@@ -62,7 +62,7 @@ Il vous suffit de vous laisser guider par les commentaires pour comprendre ce qu
 
 ### Base de données
 
-1. Dans le menu de gauche, Selectionnez votre site
+1. Dans le menu de gauche, Sélectionnez votre site
 2. Dans le volet de droite, cliquez sur `Database`
 3. Dans l'onglet `Database` cliquez sur `Open AdminerEvo`
 

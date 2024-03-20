@@ -16,6 +16,15 @@
  * Note: on utilise une fonction fléchée (ES6) pour définir la fonction de rappel
  */
 document.addEventListener("DOMContentLoaded", () => {
+  /* Une fois que le DOM est chargé, on appelle la fonction init() pour initialiser nos scripts */
+  init();
+});
+
+/**
+ * INITIALISATION
+ * On crée une fonction qui initialise les scripts JavaScript qui doivent être excécutés sur toutes les pages.
+ */
+function init() {
   /* On affiche un message dans la console pour vérifier que le fichier est bien chargé (pas obligatoire, mais pratique débugger) */
   console.log("app.js chargé 🚀");
 
@@ -24,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* On initialise aussi la fonction toggleThemeMode() */
   toggleThemeMode();
-});
+}
 
 /**
  * Fonction qui gère le formulaire de newsletter
@@ -37,10 +46,10 @@ function newsletterSubscribe() {
   const newsletterForm = document.querySelector("#newsletter-form");
 
   /* On récupère maintenant l'input de l'email et on le stock dans une constante "emailInput" */
-  const emailInput = newsletterForm.querySelector("input[type=email]");
+  const emailInput = document.querySelector("input[type=email]");
 
   /* On récupère aussi le bouton d'envoi et on le stock dans une constante "submitButton" */
-  const submitButton = newsletterForm.querySelector("button[type=submit]");
+  const submitButton = document.querySelector("button[type=submit]");
 
   /**
    * STOP ! Attendez une minute !
@@ -87,11 +96,16 @@ function newsletterSubscribe() {
    * Elle renvoie 'true' si l'email est valide et 'false' sinon.
    */
   function validateEmail(email) {
-    /* Définit l'expression régulière pour un format d'email valide */
-    const regExp = /\S+@\S+\.\S+/;
+    /**
+     * Définit l'expression régulière pour un format d'email valide
+     * Cette expression régulière est assez simple et ne couvre pas tous les cas possibles.
+     *
+     * Voir: https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/RegExp
+     */
+    const regExp = /\S+@\S+\.\S{2,}/;
 
-    /* Teste si l'email correspond à l'expression régulière */
-    /* Renvoie 'true' si l'email est valide, 'false' sinon */
+    /* test() est une méthode de l'objet RegExp qui permet de tester si une chaîne correspond à l'expression régulière */
+    /* Elle renvoie 'true' si la chaîne correspond à l'expression régulière et 'false' sinon */
     return regExp.test(email);
   }
 

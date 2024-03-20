@@ -62,7 +62,7 @@ header("Location: /subscriptions/index.php?delete=1");
 exit(); // On arrête l'exécution du script après la redirection
 
 /**
- * Génial !! Nous venons de voir le "D" (Read) de CRUD !.
+ * Génial !! Nous venons de voir le "D" (Delete) de CRUD !.
  * Mais, nous n'avons pas vue le "U" (Update) ?
  * 
  * C'est vrai, nous n'avons pas encore vu comment mettre à jour un abonné dans la base de donnée.

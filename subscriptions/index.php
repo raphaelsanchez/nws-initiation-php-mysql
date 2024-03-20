@@ -37,11 +37,6 @@ $meta_title = "Subscribers";
 $meta_description = "Liste des abonnés à la newsletter";
 
 /**
- * MESSAGE DE CONFIRMATION
- */
-$message = null;
-
-/**
  * Si la variable $_GET['delete'] existe, cela signifie que l'abonné a été supprimé avec succès.
  * Alors on defini le type de message dans la variable $message_type pour afficher un message de succès
  * et on defini le message de confirmation dans la variable $message.
@@ -108,7 +103,7 @@ $subscribers = $query->fetchAll(PDO::FETCH_OBJ);
    * On utilise la variable $message_type pour définir le type de message (info, success, error).
    * On affiche le message de confirmation contenu dans la variable $message.
    */
-  if ($message) : ?>
+  if (isset($message)) : ?>
     <p data-notice="<?= $message_type ?>">
       <span><?= $message ?></span>
       <i data-feather="x" data-close></i>

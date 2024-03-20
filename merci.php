@@ -1,8 +1,4 @@
 <?php
-/* Page variables */
-$meta_title = "Merci ! 🙏";
-$meta_description = "Merci pour votre inscription à notre newsletter !";
-
 /**
  * TRAITEMENT DU RETOUR
  * ------------------------------
@@ -12,13 +8,15 @@ $meta_description = "Merci pour votre inscription à notre newsletter !";
  * Cela nous permettra d'afficher un message de confirmation personnalisé en fonction de l'action effectuée.
  */
 
-/* On commence par initialiser la variable $success_message pour éviter les erreur */
-$page_title = "";
-$success_message = "";
-
+/**
+ * PAGE METAS
+ */
+$meta_title = "Inscription réussie";
+$meta_robot = "noindex, nofollow";
 
 /**
  * VALIDATION CONDITIONNELLE
+ * ------------------------------
  * en fonction du paramètre "register" passé en GET dans l'URL
  * 
  * On utilise la fonction isset() pour vérifier si le paramètre "register" est bien présent dans l'URL
@@ -34,32 +32,21 @@ $success_message = "";
  * Voyons pas à pas comment cela fonctionne...
  */
 
-/* SI, le paramètre "register" est bien présent dans l'URL */
-if (isset($_GET['register'])) {
-
-  /* SI, "register" est égal à "subscribers" on affiche le message correspondant */
-  if ($_GET['register'] === "subscribers") {
-    $page_title = "Merci ! 🙏";
-    $success_message = "Vous êtes maintenant bien inscrit à notre newsletter.<br>Vous recevrez bientôt de nous nouvelle.";
-  } 
-
-  /* SINON SI, "register" est égale à "user" */
-  else if ($_GET['register'] === "users") {
-    $page_title = "Super ! 🚀";
-    $success_message = "Votre compte a bien été créé.<br> Vous pouvez maintenant <a href='/login.php'>vous connecter</a>.";
-  }
-
-  /* SINON, on affiche un message par défaut */
-  else {
-    $page_title = "Bravo ! 👏";
-    $success_message = "L'enregistrement en base de donnée c'est bien passé.";
-  }
+/* SI, "register" est égal à "subscribers" on affiche le message correspondant */
+if (isset($_GET['success']) && $_GET['success'] === "1") {
+  $page_title = "Merci ! 🙏";
+  $page_content = "Vous êtes maintenant bien inscrit à notre newsletter.<br>Vous recevrez bientôt de nous nouvelle.";
+  $message_type= "success";
 } 
-/* SINON, (le paramètre "register" n'est pas présent dans l'URL) on renvoi un autre message et on change le titre */
-else {  
-  $page_title = "Oups ! 🙊";
-  $success_message = "Une erreur est survenue, veuillez réessayer plus tard...";
+/** 
+ * SINON, si il n'y a pas de paramettre, c'est que nous n'avons rien à faire ici !
+ * Alors on redirige l'utilisateur vers la page d'accueil.
+ */
+else {
+  header("Location: /");
+  exit(); // On arrête l'exécution du script après la redirection
 }
+
 
 /* Includes du header */
 include "partials/header.php"; 
@@ -69,7 +56,7 @@ include "partials/header.php";
   
   <section class="text-center">
     <h1><?php echo $page_title ?></h1>
-    <p><?php echo $success_message ?></p>
+    <p><?php echo $page_content ?></p>
     <br>
     <a href="/" role="button">Revenir à l'accueil</a>
   </section>

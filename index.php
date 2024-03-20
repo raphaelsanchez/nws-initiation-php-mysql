@@ -1,11 +1,26 @@
 <?php
 /**
- * INSTRUCTIONS
+ * INTRODUCTION
  * ------------------------------
- * Cette page "index.php" est la page d'accueil de notre site.
+ * Bienvenue dans votre premier projet PHP !
  * 
- * NB: Tout le code est commenté pour vous aider à comprendre le fonctionnement. 
- * N'hésitez pas à vous en inspirer pour votre projet 😉.
+ * Ce projet est une initiation à la programmation web avec PHP et MySQL.
+ * Il vous permettra de comprendre les bases de la programmation web et de mettre en pratique vos connaissances.
+ * 
+ * Il est construit comme un parcours guidé à travers un code complètement documenté et détaillé pas à pas pour vous aider à comprendre 
+ * la logique de programmation laissant place à l'expérimentation et à la découverte. Car c'est en pratiquant que l'on apprend le mieux.
+ * 
+ * Ce projet est divisé en plusieurs parties :
+ * - Un formulaire d'inscription à une newsletter
+ * - Un système de validation de formulaire en JavaScript
+ * - Un traitement de formulaire en PHP
+ * - Une connexion à une base de données MySQL
+ * - Une redirection après soumission du formulaire
+ * 
+ * À la fin de ce projet, vous aurez appris à manipuler du PHP, à mettre en place un CRUD (Create, Read, Update, Delete)
+ * et à interagir avec une base de données MySQL.
+ * 
+ * Alors, prêt à coder ? C'est parti ! 🚀
  */
 
 /**
@@ -17,10 +32,38 @@
  * Ici, nous avons deux variables :
  * - $meta_title : le titre de la page
  * - $meta_description : la description de la page
- * Ces variables sont récupérées dans le fichier "partials/header.php" pour personnaliser le titre et la description de la page.
+ * Ces variables sont récupérées dans le fichier "partials/header.php" pour personnaliser le <title> et la  <meta name="description"> de la page.
  */
 $meta_title = "Initiation à la programmation web";
 $meta_description = "Premier projet en PHP et MySQL";
+
+/**
+ * MESSAGE DE CONFIRMATION OU D'ERREUR
+ * ------------------------------
+ * Notre page d'accueil est un formulaire d'inscription à une newsletter.
+ * Lorsque l'utilisateur soumet le formulaire, un message est affiché en cas d'erreur.
+ * Nous allons donc commencer par gérer la condition de ce message en function des paramètres GET de l'URL.
+ * 
+ * exemple : /?error=already_subscribed
+ * 
+ * Si la variable $_GET['error'] existe, cela signifie que la page de traitement nous à redirigé vers cette page
+ * avec un paramètre "error" dans l'URL pour nous informer d'une erreur lors de l'inscription.
+ * 
+ * Nous récupérons la valeur de ce paramètre et affichons un message en fonction de la valeur.
+ */
+if (isset($_GET['error']) && $_GET['error'] === "already_subscribed") {
+  $message = "Désolé, vous êtes déjà inscrit avec cette adresse.";
+  $message_type = "warning";
+} elseif (isset($_GET['error']) && $_GET['error'] === "invalid_email") {
+  $message = "Arf ! L'adresse email n'est pas valide. Veuillez réessayer.";
+  $message_type = "error";
+} elseif (isset($_GET['success']) && $_GET['success'] === "subscribed"){
+  $message = "Merci ! Votre inscription a bien été prise en compte.";
+  $message_type = "success";
+} else {
+  $message = null;
+  $message_type = null;
+}
 
 /**  
  * INCLUDES
@@ -29,6 +72,9 @@ $meta_description = "Premier projet en PHP et MySQL";
  * 
  * Ici, nous incluons le fichier "header.php" qui contient tout le code HTML de l'entête de notre site avec
  * les balises <html>, <head>, <meta>, <title>, <link>, <script> ainsi que la balise d'ouverture <body>.
+ * 
+ * On utilise la fonction include_once pour inclure le fichier une seule fois.
+ * Cela permet d'éviter d'inclure plusieurs fois le même fichier et de générer des erreurs.
  */
 include_once "partials/header.php"; 
 ?> <!-- On ferme ici la balise PHP pour commencer à écrire du HTML -->
@@ -51,6 +97,26 @@ include_once "partials/header.php";
 
     <article>
       <h3>Inscrivez-vous à notre Newsletter !</h3>
+      <?php 
+        /**
+         * MESSAGE DE CONFIRMATION
+         * ------------------------------
+         * Nous avons défini plus haut un message de confirmation ou d'erreur en fonction des paramètres GET de l'URL.
+         * Donc, si la variable $message existe, cela signifie qu'un message doit être affiché à l'utilisateur.
+         * 
+         * Nous connditionnons donc un message SI la variable $message existe.
+         * On passe la variable $message_type dans data-notice (error, warning, success, info) pour afficher le bon style de message.
+         * (voir assets/styles/app.css pour les styles des messages)
+         * Et on affiche le message dans une balise <p> avec un attribut data-notice pour le style et un attribut data-close pour fermer le message.
+         * 
+         * Vous voyez, c'est simple non ? 😉
+         */
+        if (isset($message)) : ?>
+        <p data-notice="<?= $message_type ?>">
+          <span><?= $message ?></span>
+          <i data-feather="x" data-close></i>
+        </p>
+      <?php endif; ?>
       <!--
         EXEMPLE DE FORMULAIRE:
         Voici un exemple de formulaire d'inscription à une newsletter qui stock l'adresse email en base de donnée avec la date de soumission. 
@@ -95,7 +161,7 @@ include_once "partials/header.php";
     <ol>
       <li>Lorsque qu'un utilisateur commence à saisir des informations dans le champ email, une fonction JS vérifie que ce qui est tapé dans le champs correspond bien à une adresse email grace à une <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/RegExp" target="_blank" rel="noopener noreferrer">expression régulière (ou RegExp)</a>. <br>
         Si l'adresse est valide, le bouton <em>S'inscrire</em> devient cliquable.</li>
-      <li>L'utilisateur clique alors sur le bouton et le formulaire est envoyé au script PHP <code>includes/action-newsletter-subscribe.php</code> qui se charge de valider le champ. <br>
+      <li>L'utilisateur clique alors sur le bouton et le formulaire est envoyé au script PHP <code>subscriptions/new.php</code> qui se charge de valider le champ. <br>
       Si il est correcte, alors un appel à la <code>BDD</code> est fait pour y inscrire la donnée récupérée.</li>
       <li>Enfin, si tout c'est bien passé, l'utilisateur est redirigé vers la page <code>merci.php</code> avec un paramètre dans l'url <code>register=subscribers</code> pour lui indiquer que l'inscription c'est bien passé.</li>
     </ol>

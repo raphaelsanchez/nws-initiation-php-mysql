@@ -115,6 +115,9 @@ $query->execute([
   "email" => $_POST['email']
 ]);
 
+// si tout s'est bien passé, on redirige l'utilisateur vers la page de confirmation
+
+
 /**
 * REDIRECTION
 * ------------------------------
@@ -126,7 +129,7 @@ $query->execute([
 *
 * Voir : https://www.php.net/manual/fr/function.header.php
 */
-header("Location: /merci.php?success=subscribed");
+header("Location: /merci.php?success=subcribed");
 exit();
 
 /**

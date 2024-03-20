@@ -33,7 +33,7 @@ $meta_robot = "noindex, nofollow";
  */
 
 /* SI, "register" est égal à "subscribers" on affiche le message correspondant */
-if (isset($_GET['success']) && $_GET['success'] === "1") {
+if (isset($_GET['success']) && $_GET['success'] === "subcribed") {
   $page_title = "Merci ! 🙏";
   $page_content = "Vous êtes maintenant bien inscrit à notre newsletter.<br>Vous recevrez bientôt de nous nouvelle.";
   $message_type= "success";

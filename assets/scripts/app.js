@@ -33,6 +33,9 @@ function init() {
 
   /* On initialise aussi la fonction toggleThemeMode() */
   toggleThemeMode();
+
+  /* On initialise la fonction closeNotification() */
+  closeNotification();
 }
 
 /**
@@ -116,6 +119,38 @@ function newsletterSubscribe() {
    * et on appelle la fonction validate à chaque fois que l'événement est déclenché pour vérifier si l'email est valide
    */
   emailInput.addEventListener("input", validateNewsletterEmailField);
+}
+
+/**
+ * Fermer les notifications
+ * Cette fonction ferme les notifications quand on clique sur le bouton de fermeture
+ * Elle est appelée dans l'event listener ci-dessous
+ */
+function closeNotification() {
+  /* On commence par cibler les éléments de la notification */
+  const notifications = document.querySelectorAll("[data-notice]");
+
+  /* Si il n'y a pas de notification on sort de la fonction */
+  if (!notifications) {
+    return;
+  }
+
+  /* On boucle sur les notifications pour ajouter un écouteur d'événement sur le bouton de fermeture */
+  notifications.forEach((notice) => {
+    /* On récupère le bouton de fermeture de la notification */
+    const closeBtn = notice.querySelector("[data-close]");
+
+    /* Si closeBtn est null (c'est qu'il n'y en a pas) alors on sort de la boucle */
+    if (!closeBtn) {
+      return;
+    }
+
+    /* On écoute l'événement "click" sur le bouton de fermeture */
+    closeBtn.addEventListener("click", () => {
+      /* et on supprime la notification */
+      notice.remove();
+    });
+  });
 }
 
 /**

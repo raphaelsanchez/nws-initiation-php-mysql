@@ -29,9 +29,10 @@ $meta_site_author = "Raphael Sanchez";
   <link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.orange.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.colors.min.css"/>
-  <link rel="stylesheet" href="assets/styles/app.css">
+  <link rel="stylesheet" href="/assets/styles/app.css">
 
-  <script src="assets/scripts/app.js" defer></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="/assets/scripts/app.js" defer></script>
 </head>
 <body>
 

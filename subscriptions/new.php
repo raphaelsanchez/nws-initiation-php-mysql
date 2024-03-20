@@ -5,10 +5,12 @@
  * Nous devons donc, avant tout, nous connecter à la base de donnée.
  * Pour cela, on va inclure le fichier d'initialisation qui contient la connexion à la base de donnée.
  * 
- * On utilise la fonction include() pour inclure le fichier "db.php" qui contient la connexion à la base de donnée.
+ * On utilise la "require_once" pour inclure le fichier "db.php" qui contient la connexion à la base de donnée.
  * Notez que le chemin du fichier est relatif à la position du fichier "action-newsletter-subscribe.php".
+ * 
+ * Voir : https://www.php.net/manual/fr/function.require-once.php
  */ 
-include "../includes/db.php";
+require_once "../includes/db.php";
 
 /**
  * PRÉPARATION DE LA REQUÊTE SQL
@@ -21,48 +23,27 @@ include "../includes/db.php";
  * - (email, subscribed_at) : dans les colonnes "email" et "subscribed_at"
  * - VALUES (:email, NOW()) : on insère les valeurs :email et la date actuelle
  * - Enfin, on stocke la requête dans une variable $query
+ * 
+ * Note : On aurait pu aussi utiliser $bdd->query() pour exécuter une requête SQL directement
+ * mais c'est une mauvaise pratique car cela expose le site à des failles de sécurité (injection SQL)
+ * Il est préférable d'utiliser $bdd->prepare() pour préparer la requête et échapper les données utilisateurs
+ * 
+ * Voir : https://www.php.net/manual/fr/pdo.prepare.php
+ * Voir : https://sql.sh/cours/insert-into
  */
 $query = $bdd->prepare("INSERT INTO subscribers (email, subscribed_at) VALUES (:email, NOW())");
-
-/**
- * EXÉCUTION DE LA REQUÊTE SQL
- * ------------------------------
- * ATTENTION : Ne JAMAIS faire confiance aux données utilisateurs ! J-A-M-A-I-S !!!!
- *
- * On commence donc par échapper les données utilisateurs avant de les insérer dans la base de donnée
- * grâce à la fonction htmlspecialchars() qui transforme les caractères spéciaux en entités HTML
- * afin d'éviter les failles XSS (Cross-Site Scripting).
- */ 
-$sanitizedEmail = htmlspecialchars($_POST['email']);
 
 /**
  * Enfin, on utilise la méthode execute() de la variable $query pour exécuter la requête
  * On passe un tableau associatif en argument de la méthode execute()
  * Ce tableau contient les valeurs à insérer dans la requête
  * Ici, on insère la valeur de $sanitizedEmail dans le marqueur :email
+ * 
+ * Voir : https://www.php.net/manual/fr/pdostatement.execute.php
  */
 $query->execute([
-  "email" => $sanitizedEmail
+  "email" => $_POST['email']
 ]);
-
-/** On ferme la requête */
-$query->closeCursor();
-
-/**
- * Pour les besoins de l'exercice, on va afficher un message de confirmation
- * pour indiquer à l'utilisateur que son adresse email a bien été enregistrée
- * dans la base de donnée.
- *
- * NOTE : dans un vrai projet, on redirigerai l'utilisateur vers une autre page...
- */
-echo "L'adresse <strong>" . $sanitizedEmail . "</strong> a bien été enregistrée dans la base de donnée le <strong>" . date('Y-m-d H:i:s') . "</strong> ! 🚀";
-echo "<br><br>";
-echo "<a href='/merci.php?register=subscribers'>Aller à la page de remerciement</a>";
-
-/**
- * Super ! on a réussi à enregistrer l'adresse email dans la base de donnée.
- * maintenant, on pourrait rediriger l'utilisateur vers une autre page pour lui afficher un message de remerciement.
- */
 
 /**
 * REDIRECTION
@@ -74,9 +55,14 @@ echo "<a href='/merci.php?register=subscribers'>Aller à la page de remerciement
 * Cela peut être utile pour afficher un message de confirmation par exemple
 * ex: header("Location: /merci.php?register=subscribers");
 *
-* Enlevez les // au début de la ligne ci-dessous pour rediriger l'utilisateur vers la page de remerciement
+* Voir : https://www.php.net/manual/fr/function.header.php
 */
-// header("Location: /merci.php?register=subscribers");
+header("Location: /merci.php?register=subscribers");
+
+/**
+ * Très important : on arrête l'exécution du script avec la fonction exit() après une redirection
+ */
+exit();
 
 /**
 * REMARQUES :
@@ -87,4 +73,11 @@ echo "<a href='/merci.php?register=subscribers'>Aller à la page de remerciement
 * - envoyer un email de confirmation à l'utilisateur
 * - envoyer un email à l'administrateur pour l'informer de la nouvelle inscription
 * - etc...
+* 
+* ... mais pour l'instant, nous nous concentrons sur les bases.
 */
+
+/**
+ * Super !! Nous venons de voir le "C" (Create) de CRUD, passons maintenant à la lecture des données.
+ * Rendez-vous dans le fichier "subscriptions/index.php" pour la suite.
+ */

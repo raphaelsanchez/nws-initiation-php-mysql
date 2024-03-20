@@ -94,6 +94,7 @@ button[data-toggle="theme"]:not(:focus-visible) {
   display: flex;
   gap: 1rem;
   padding: 1rem;
+  margin-block: 1rem;
   border: 1px solid var(--pico-color-slate-50);
   border-radius: var(--pico-border-radius);
   font-weight: 500;
@@ -133,6 +134,12 @@ button[data-toggle="theme"]:not(:focus-visible) {
   &::before {
     content: "❌";
   }
+}
+
+[data-notice] :where(i, svg) {
+  margin-block: auto;
+  margin-inline-start: auto;
+  cursor: pointer;
 }
 
 /**

@@ -30,7 +30,7 @@ $meta_description = "Premier projet en PHP et MySQL";
  * Ici, nous incluons le fichier "header.php" qui contient tout le code HTML de l'entête de notre site avec
  * les balises <html>, <head>, <meta>, <title>, <link>, <script> ainsi que la balise d'ouverture <body>.
  */
-include "partials/header.php"; 
+include_once "partials/header.php"; 
 ?> <!-- On ferme ici la balise PHP pour commencer à écrire du HTML -->
 
 
@@ -50,7 +50,7 @@ include "partials/header.php";
     <p>Nous utilisons aussi un peu de Javascript pour <strong>valider le formulaire</strong>. En effet, si vous regardez bien, le bouton <code>S'inscrire</code> n'est pas cliquable tant qu'une adresse email valide n'est pas renseignée.</p>
 
     <article>
-      <h3>Inscription à la newsletter</h3>
+      <h3>Inscrivez-vous à notre Newsletter !</h3>
       <!--
         EXEMPLE DE FORMULAIRE:
         Voici un exemple de formulaire d'inscription à une newsletter qui stock l'adresse email en base de donnée avec la date de soumission. 
@@ -75,7 +75,7 @@ include "partials/header.php";
         -> <bouton> permet de soumettre le formulaire. Il a un attribut :
           - un attribut "type" avec la valeur "submit" pour envoyer les données.
       -->
-      <form id="newsletter-form" action="includes/action-newsletter-subscribe.php" method="POST">
+      <form id="newsletter-form" action="subscriptions/new.php" method="POST">
         <fieldset role="group">
           <label class="sr-only" for="email">Entrez votre adresse email</label>
           <input type="email" name="email" id="email" autocomplete="off" placeholder="Votre adresse email" required>
@@ -84,7 +84,7 @@ include "partials/header.php";
       </form>
       <!-- 
         FIN DE L'EXEMPLE 
-        pour la suite, voir le fichier "includes/action-newsletter-subscribe.php" pour le traitement du formulaire
+        pour la suite, voir le fichier "subscription/new.php" pour le traitement du formulaire
       -->
 
     </article>
@@ -100,6 +100,13 @@ include "partials/header.php";
       <li>Enfin, si tout c'est bien passé, l'utilisateur est redirigé vers la page <code>merci.php</code> avec un paramètre dans l'url <code>register=subscribers</code> pour lui indiquer que l'inscription c'est bien passé.</li>
     </ol>
     <p data-notice="info">Malgré la simplicité de ce formulaire, il constitue une bonne base pour commencer et comprendre la logique de programmation.</p>
+  </section>
+
+  <section>
+    <h2>Et maintenant ?</h2>
+    <p>La suite se passe dans le code. Ouvrez le projet votre éditeur de code (VS Code), commencez par allez sur la page <code>index.php</code> à la racine et laissez vous guider.</p>
+    <p>L'ensemble de se cours est un parcours guidé à travers un code complètement documenté et détaillé pas à pas. Lisez bien les commentaires, analysez ce qui se passe, expérimentez et laissez vous guider. Vous y apprendrez à manipuler du PHP et mettre en place un CRUD.</p>
+    <p>Et surtout, n'oubliez pas que vous n'êtes pas seul. Si vous avez des questions, référez vous aux documentation et n'hésitez pas à demander de l'aide à votre intervenant ou à vos camarades.</p>
   </section>
 
   <section id="exercices">
@@ -168,4 +175,4 @@ include "partials/header.php";
  * qui contient tout le code HTML du pied de page de notre site avec
  * la balises <footer> ainsi que la balise de fermeture </body></html> qui ont été ouvert dans header.php.
  */
-include "partials/footer.php"; 
+include_once "partials/footer.php"; 

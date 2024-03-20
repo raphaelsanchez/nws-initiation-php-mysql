@@ -19,5 +19,8 @@
 </footer>
 
 </main><!-- end of main -->
+<script>
+  feather.replace();
+</script>
 </body><!-- end of body -->
 </html><!-- end of html -->

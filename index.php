@@ -157,11 +157,6 @@ include "partials/header.php";
       <p>Pour plus de themes, aller <a href="https://picocss.com/docs/version-picker" target="_blank" rel="noopener noreferrer">jeter un œil au version picker</a></p>
     </details>
   </section>
-
-  <p data-notice="info">Info note</p>
-  <p data-notice="success">Success note</p>
-  <p data-notice="warning">Warning note</p>
-  <p data-notice="error">Error note</p>
 </main>
 
 <!-- On ré-ouvre la balise PHP pour à nouveau écrire du code PHP -->

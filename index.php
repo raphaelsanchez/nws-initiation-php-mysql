@@ -163,7 +163,8 @@ include_once "partials/header.php";
         Si l'adresse est valide, le bouton <em>S'inscrire</em> devient cliquable.</li>
       <li>L'utilisateur clique alors sur le bouton et le formulaire est envoyé au script PHP <code>subscriptions/new.php</code> qui se charge de valider le champ. <br>
       Si il est correcte, alors un appel à la <code>BDD</code> est fait pour y inscrire la donnée récupérée.</li>
-      <li>Enfin, si tout c'est bien passé, l'utilisateur est redirigé vers la page <code>merci.php</code> avec un paramètre dans l'url <code>register=subscribers</code> pour lui indiquer que l'inscription c'est bien passé.</li>
+      <li>Enfin, si tout c'est bien passé, l'utilisateur est redirigé vers la page <code>merci.php</code> avec un paramètre dans l'url <code>success=subcribed</code> pour lui indiquer que l'inscription c'est bien passé.</li>
+      <li>Maintenant vous pouvez aller voir l'enregistrement en allant sur la <a href="/subscriptions">page des souscriptions</a></li>
     </ol>
     <p data-notice="info">Malgré la simplicité de ce formulaire, il constitue une bonne base pour commencer et comprendre la logique de programmation.</p>
   </section>

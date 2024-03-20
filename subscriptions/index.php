@@ -4,8 +4,8 @@
  * ------------------------------
  * Cette page "subscriptions/index.php" est une page PHP qui affiche la liste des abonnés à la newsletter.
  * 
- * NB: Tout le code est commenté pour vous aider à comprendre le fonctionnement. 
- * N'hésitez pas à vous en inspirer pour votre projet 😉.
+ * Notez bien que cette page est un exemple très simple pour illustrer le principe de base de la lecture des données.
+ * Dans un vrai projet, cette page ne serait pas accessible à tout le monde. Il faudrait ajouter unn système d'authentification.
  */
 
 
@@ -88,7 +88,7 @@ $subscribers = $query->fetchAll(PDO::FETCH_OBJ);
 <!-- Oui, bien que ce soit une page PHP, on peut aussi écrire du HTML qui peut aussi contenir du PHP -->
 <main class="container">
   <header>
-    <h1>Subscriptions</h1> 
+    <h1>Souscriptions</h1> 
   </header>
 
   <p>Voici la liste des abonnés à la newsletter :</p>

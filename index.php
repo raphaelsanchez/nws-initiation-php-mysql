@@ -99,7 +99,7 @@ include "partials/header.php";
       Si il est correcte, alors un appel à la <code>BDD</code> est fait pour y inscrire la donnée récupérée.</li>
       <li>Enfin, si tout c'est bien passé, l'utilisateur est redirigé vers la page <code>merci.php</code> avec un paramètre dans l'url <code>register=subscribers</code> pour lui indiquer que l'inscription c'est bien passé.</li>
     </ol>
-    <p data-note="info">Malgré la simplicité de ce formulaire, il constitue une bonne base pour commencer et comprendre la logique de programmation.</p>
+    <p data-notice="info">Malgré la simplicité de ce formulaire, il constitue une bonne base pour commencer et comprendre la logique de programmation.</p>
   </section>
 
   <section id="exercices">
@@ -114,7 +114,7 @@ include "partials/header.php";
       <li><strong>Redirigez vers page de remerciement</strong> après l'enregistrement en base de donnée et ajuster le message en fonction du context.</li>
       <li><strong>Gérer le Dark Mode</strong> en complétant la fonction <code>toggleTheme()</code> dans <code>assets/scripts/app.js</code>.</li>
     </ol>
-    <p data-note="warning">Attention à la correspondance des attributs "name" de vos "input" avec les noms des colonnes de votre table</p>
+    <p data-notice="warning">Attention à la correspondance des attributs "name" de vos "input" avec les noms des colonnes de votre table</p>
     <h3>Remarques</h3>
     <ul>
       <li>Vous pouvez personnaliser cette page ou complètement la réécrire.</li>
@@ -157,6 +157,11 @@ include "partials/header.php";
       <p>Pour plus de themes, aller <a href="https://picocss.com/docs/version-picker" target="_blank" rel="noopener noreferrer">jeter un œil au version picker</a></p>
     </details>
   </section>
+
+  <p data-notice="info">Info note</p>
+  <p data-notice="success">Success note</p>
+  <p data-notice="warning">Warning note</p>
+  <p data-notice="error">Error note</p>
 </main>
 
 <!-- On ré-ouvre la balise PHP pour à nouveau écrire du code PHP -->

@@ -90,7 +90,7 @@ button[data-toggle="theme"]:not(:focus-visible) {
 }
 
 /* Notes */
-[data-note] {
+[data-notice] {
   display: flex;
   gap: 1rem;
   padding: 1rem;
@@ -99,7 +99,7 @@ button[data-toggle="theme"]:not(:focus-visible) {
   font-weight: 500;
 }
 
-[data-note="info"] {
+[data-notice="info"] {
   color: var(--pico-color-slate-750);
   border-color: var(--pico-color-slate-150);
   background-color: var(--pico-color-slate-50);
@@ -108,7 +108,7 @@ button[data-toggle="theme"]:not(:focus-visible) {
   }
 }
 
-[data-note="warning"] {
+[data-notice="warning"] {
   color: var(--pico-color-amber-750);
   border-color: var(--pico-color-amber-150);
   background-color: var(--pico-color-amber-50);

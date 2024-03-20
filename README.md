@@ -38,6 +38,8 @@ Vous aborderez les notions suivantes :
 L'ensemble du code est commenté pour vous aider à comprendre chaque étape.
 Il vous suffit de vous laisser guider par les commentaires pour comprendre ce que fait chaque ligne de code.
 
+Pour voir un aperçu du code source, vous pouvez [basculer sur la branche starter](https://github.com/raphaelsanchez/nws-initiation-php-mysql/tree/starter)
+
 ## Prérequis
 
 ✅ Avoir des notions de base en HTML et CSS  

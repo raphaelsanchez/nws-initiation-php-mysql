@@ -63,12 +63,32 @@ Il vous suffit de vous laisser guider par les commentaires pour comprendre ce qu
 
 ### Installation sur une environnement local (MAMP, WAMP, LAMP, etc.)
 
+Pour vous aider à démarrer, nous avons fourni un fichier `dump.sql.gz` qui contient une base de données avec des données fictives
+correspondant au site que vous allez créer.
+
 1. Clonez le dépôt dans votre dossier public de votre serveur local (par exemple `/Applications/MAMP/htdocs/`)
 2. Créez une base de données MySQL sur votre serveur local
-3. Importez le fichier `dump.sql.gz` qui se trouve à la racine dans votre base de données.
-4. Modifiez le fichier `db.php` dans le dossier `includes` avec les informations de votre base de données.
+3. Ouvrez votre base de données MySQL (Adminer, PhpMyAdmin, etc.)
+4. Créez une nouvelle base de données
+5. Importez le fichier `dump.sql.gz` qui se trouve à la racine dans votre base de données.
+6. Modifiez le fichier `db.php` dans le dossier `includes` avec les informations de votre base de données.
 
 ... et voilà, votre site est prêt à être utilisé 🚀 !
+
+### Structure de la base de données
+
+La base de données fournie contient 1 tables :
+
+- `subscribers` : contient les informations des utilisateurs qui se sont inscrits à la newsletter
+
+```sql
+CREATE TABLE `subscribers` (
+  `id` bigint(60) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
 
 ### Structure du projet
 

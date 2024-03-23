@@ -48,7 +48,7 @@ Il vous suffit de vous laisser guider par les commentaires pour comprendre ce qu
 
 ## Utilisation
 
-### Installation
+### Installation sur LocalWP
 
 1. Ouvrez votre serveur local
 2. Téléchargez le dossier `nws-initiation-php-mysql--starter.zip`
@@ -57,16 +57,18 @@ Il vous suffit de vous laisser guider par les commentaires pour comprendre ce qu
 5. Choisissez un nom pour votre site et cliquez sur `Continue`
 6. Sélectionnez l'option `Preferred` et cliquez sur `Import site`
 7. Cliquez sur `View Site` pour voir votre site
+8. Dans le menu de gauche, cliquez sur `Database` et cliquez sur `Open AdminerEvo`
 
 ... et voilà, votre site est prêt à être utilisé 🚀 !
 
-### Base de données
+### Installation sur une environnement local (MAMP, WAMP, LAMP, etc.)
 
-1. Dans le menu de gauche, Sélectionnez votre site
-2. Dans le volet de droite, cliquez sur `Database`
-3. Dans l'onglet `Database` cliquez sur `Open AdminerEvo`
+1. Clonez le dépôt dans votre dossier public de votre serveur local (par exemple `/Applications/MAMP/htdocs/`)
+2. Créez une base de données MySQL sur votre serveur local
+3. Importez le fichier `dump.sql.gz` qui se trouve à la racine dans votre base de données.
+4. Modifiez le fichier `db.php` dans le dossier `includes` avec les informations de votre base de données.
 
-... et voilà, vous pouvez maintenant gérer votre base de données 💪 !
+... et voilà, votre site est prêt à être utilisé 🚀 !
 
 ### Structure du projet
 

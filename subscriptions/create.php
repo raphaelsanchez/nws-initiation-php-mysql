@@ -1,5 +1,21 @@
 <?php
 /**
+ * SECURITÉ
+ * ------------------------------
+ * Il n'y a aucune raison de permettre l'accès à ce fichier directement.
+ * C'est pourquoi on va vérifier que la requête est bien une requête POST.
+ * Si ce n'est pas le cas, on redirige l'utilisateur vers la page d'accueil.
+ * 
+ * Pour cela, on utilise la variable superglobale $_SERVER['REQUEST_METHOD'] qui contient la méthode de la requête HTTP
+ * pour vérifier si la méthode est bien "POST".
+ * On compare la valeur de cette variable à 'POST' avec un "if". Si la comparaison est fausse, on redirige l'utilisateur.
+ */
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+  header("Location: /");
+  exit(); // On arrête l'exécution du script après la redirection
+}
+
+/**
  * CONNEXION À LA BASE DE DONNÉE
  * ------------------------------
  * Nous devons donc, avant tout, nous connecter à la base de donnée.
@@ -58,7 +74,10 @@ $sanitizedEmail = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
  * C'est en fonction de ce paramètre que l'on pourra afficher un message d'erreur personnalisé dans la page de destination.
  */
 if (!$sanitizedEmail) {
-  header("Location: /?error=invalid_email");
+  // Récupérez l'URL de la page précédente
+  $previousPage = $_SERVER['HTTP_REFERER'] ?? '/';
+  // Redirigez l'utilisateur vers la page précédente avec un message d'erreur
+  header("Location: $previousPage?error=invalid_email");
   exit(); // On arrête l'exécution du script après la redirection
 }
 
@@ -96,7 +115,10 @@ $subscribed = $emailExistenceCheckQuery->fetch();
  * Si l'adresse email est déjà enregistrée, on redirige l'utilisateur d'où il vient avec un message d'erreur.
  */
 if ($subscribed) {
-  header("Location: /?error=already_subscribed");
+  // Récupérez l'URL de la page précédente
+  $previousPage = $_SERVER['HTTP_REFERER'] ?? '/';
+  // Redirigez l'utilisateur vers la page précédente avec un message d'erreur
+  header("Location: $previousPage?error=already_subscribed");
   exit();
 }
 
@@ -112,7 +134,7 @@ if ($subscribed) {
  * Voir : https://www.php.net/manual/fr/pdostatement.execute.php
  */
 $query->execute([
-  "email" => $_POST['email']
+  "email" => strtolower($_POST['email'])
 ]);
 
 // si tout s'est bien passé, on redirige l'utilisateur vers la page de confirmation

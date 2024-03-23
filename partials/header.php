@@ -18,6 +18,7 @@ $meta_robot = "index, follow";
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark" />
 
   <title><?= (isset($meta_title)) ? ($meta_title . ' | ') : null ?><?= $meta_site_name ?></title>
   <meta name="description" content="<?= (isset($meta_description)) ? $meta_description : $meta_site_description ?>">

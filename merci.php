@@ -58,7 +58,7 @@ include "partials/header.php";
     <h1><?php echo $page_title ?></h1>
     <p><?php echo $page_content ?></p>
     <br>
-    <a href="/" role="button">Revenir à l'accueil</a>
+    <p><a href="/#explications" role="button">Revenir à l'accueil</a></p>
   </section>
 
 </main>

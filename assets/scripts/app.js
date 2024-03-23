@@ -147,8 +147,10 @@ function closeNotification() {
 
     /* On écoute l'événement "click" sur le bouton de fermeture */
     closeBtn.addEventListener("click", () => {
-      /* et on supprime la notification */
+      /* On supprime la notification du DOM en utilisant la méthode remove() */
       notice.remove();
+      /* Supprime le paramètre de l'URL sans recharger la page grâce à la méthode history.replaceState() */
+      window.history.replaceState({}, document.title, window.location.pathname);
     });
   });
 }
@@ -177,7 +179,9 @@ function toggleThemeMode() {
   //
   // BONUS:
   // Stockez le thème actuel dans le localStorage pour le conserver après le rechargement de la page
-  // 10. Récupérez le thème stocké dans le localStorage
+  // Voir: https://developer.mozilla.org/fr/docs/Web/API/Window/localStorage
+  //
+  // 10. Récupérez le thème stocké dans le localStorage en utilisant la méthode getItem()
   // 11. Mettez à jour le thème actuel en utilisant la méthode setAttribute()
   // 12. Stockez le thème actuel dans le localStorage à chaque fois que le thème change
   // 13. Testez votre code en rechargeant la page pour vérifier que le thème est conservé

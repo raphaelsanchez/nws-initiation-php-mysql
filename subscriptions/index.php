@@ -1,15 +1,5 @@
 <?php
 /**
- * INSTRUCTIONS
- * ------------------------------
- * Cette page "subscriptions/index.php" est une page PHP qui affiche la liste des abonnés à la newsletter.
- * 
- * Notez bien que cette page est un exemple très simple pour illustrer le principe de base de la lecture des données.
- * Dans un vrai projet, cette page ne serait pas accessible à tout le monde. Il faudrait ajouter unn système d'authentification.
- */
-
-
-/**
  * CONNEXION À LA BASE DE DONNÉE
  * ------------------------------
  * Nous devons donc, avant tout, nous connecter à la base de donnée puis que nous allons avoir besoin de récupérer les abonnés.
@@ -50,12 +40,6 @@ if (isset($_GET['delete'])) {
 }
 
 /**
- * Puis, nous incluons également le fichier "header.php" qui contient tout le code HTML de l'entête de notre site avec
- * les balises <html>, <head>, <meta>, <title>, <link>, <script> ainsi que la balise d'ouverture <body>.
- */
-include_once "../partials/header.php"; 
-
-/**
  * PRÉPARATION DE LA REQUÊTE SQL
  * ------------------------------
  * Nous utilisons la fonction SQL SELECT pour récupérer toutes les données de la table "subscribers"
@@ -82,6 +66,12 @@ $query = $bdd->query("SELECT * FROM subscribers");
  * Voir : https://www.php.net/manual/fr/pdostatement.fetchall.php
  */
 $subscribers = $query->fetchAll(PDO::FETCH_OBJ);
+
+/**
+ * Puis, nous incluons également le fichier "header.php" qui contient tout le code HTML de l'entête de notre site avec
+ * les balises <html>, <head>, <meta>, <title>, <link>, <script> ainsi que la balise d'ouverture <body>.
+ */
+include_once "../partials/header.php"; 
 ?> <!-- On ferme ici la balise PHP pour commencer à écrire du HTML -->
 
 
@@ -91,7 +81,17 @@ $subscribers = $query->fetchAll(PDO::FETCH_OBJ);
     <h1>Souscriptions</h1> 
   </header>
 
-  <p>Voici la liste des abonnés à la newsletter :</p>
+  <!-- 
+    On affiche le nombre d'abonnés à la newsletter .
+    On utilise la fonction PHP count() pour compter le nombre d'éléments dans le tableau $subscribers.
+    On affiche le nombre d'abonnés avec un message personnalisé.
+    Voir : https://www.php.net/manual/fr/function.count.php
+
+    Notez que nous utilisons un opérateur ternaire pour afficher "abonné" ou "abonnés" en fonction du nombre d'abonnés.
+    `count($subscribers) > 1 ? 'abonnés' : 'abonné'` signifie : si le nombre d'abonnés est supérieur à 1, on affiche "abonnés", sinon "abonné".
+    voir : https://www.php.net/manual/fr/language.operators.comparison.php#language.operators.comparison.ternary
+  -->
+  <p>Il y a actuellement <strong><?= count($subscribers) ?> <?= count($subscribers) > 1 ? 'abonnés' : 'abonné' ?></strong> à la newsletter.</p>
 
   <?php
   /**
@@ -181,18 +181,20 @@ $subscribers = $query->fetchAll(PDO::FETCH_OBJ);
             <td>
               <?php
               /**
-               * On ajoute un lien pour supprimer l'abonné
+               * On ajoute un bouton pour supprimer l'abonné
                * On utilise la propriété "id" de l'objet $subscriber pour passer l'identifiant de l'abonné à la page "delete.php"
-               * On utilise la méthode GET pour envoyer l'identifiant de l'abonné dans l'URL
+               * On utilise la méthode POST pour envoyer l'identifiant de l'abonné dans l'URL.
+               * Vous noterez que nous utilisons un formulaire pour envoyer la requête de suppression qui contient un champ caché "id" pour envoyer l'identifiant de l'abonné.
+               * Cela est plus sécurisé que d'utiliser un lien direct avec une balise <a href="delete.php?id=1">Supprimer</a>.
+               * D'autant plus que la page "delete.php" n'est pas accessible directement pour des raisons de sécurité.
+               * Sans cela, n'importe qui pourrait supprimer un abonné en tapant l'URL directement dans le navigateur.
                * ex: delete.php?id=1
                */
-              echo '<a href="delete.php?id=' . $subscriber->id . '">Supprimer</a>';
+              echo '<form action="delete.php" method="POST">';
+              echo '  <input type="hidden" name="id" value="' . $subscriber->id . '">';
+              echo '  <button aria-label="Supprimer"><i data-feather="trash-2"></i></button>';
+              echo '</form>';
               /**
-               * Nottez qu'ici nous n'avons pas fermé la balise PHP avec "?>" pour continuer à écrire du code HTML.
-               * Nous avons "echo" le code HTML directement et avons inséré le code PHP avec une syntaxe alternative.
-               * Cela permet d'insérer du code PHP dans du code HTML de manière plus lisible.
-               * Pour en savoir plus : https://www.php.net/manual/fr/control-structures.alternative-syntax.php
-               * 
                * Pour la suite, rendez-vous dans le fichier "subscriptions/delete.php" pour voir comment supprimer un abonné.
                */ ?>
             </td>

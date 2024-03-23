@@ -141,7 +141,7 @@ include_once "partials/header.php";
         -> <bouton> permet de soumettre le formulaire. Il a un attribut :
           - un attribut "type" avec la valeur "submit" pour envoyer les données.
       -->
-      <form id="newsletter-form" action="subscriptions/new.php" method="POST">
+      <form id="newsletter-form" action="subscriptions/create.php" method="POST">
         <fieldset role="group">
           <label class="sr-only" for="email">Entrez votre adresse email</label>
           <input type="email" name="email" id="email" autocomplete="off" placeholder="Votre adresse email" required>
@@ -161,9 +161,9 @@ include_once "partials/header.php";
     <ol>
       <li>Lorsque qu'un utilisateur commence à saisir des informations dans le champ email, une fonction JS vérifie que ce qui est tapé dans le champs correspond bien à une adresse email grace à une <a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/RegExp" target="_blank" rel="noopener noreferrer">expression régulière (ou RegExp)</a>. <br>
         Si l'adresse est valide, le bouton <em>S'inscrire</em> devient cliquable.</li>
-      <li>L'utilisateur clique alors sur le bouton et le formulaire est envoyé au script PHP <code>subscriptions/new.php</code> qui se charge de valider le champ. <br>
+      <li>L'utilisateur clique alors sur le bouton et le formulaire est envoyé au script PHP <code>subscriptions/create.php</code> qui se charge de valider le champ. <br>
       Si il est correcte, alors un appel à la <code>BDD</code> est fait pour y inscrire la donnée récupérée.</li>
-      <li>Enfin, si tout c'est bien passé, l'utilisateur est redirigé vers la page <code>merci.php</code> avec un paramètre dans l'url <code>success=subcribed</code> pour lui indiquer que l'inscription c'est bien passé.</li>
+      <li>Enfin, si tout c'est bien passé, l'utilisateur est redirigé vers la page <code>merci.php</code> avec un paramètre dans l'url <code>success=subcribed</code> pour lui indiquer que l'inscription c'est bien passé. Dans le cas contraire, si il y a une erreur, on redirige l'utilisateur d'où il vient avec un code d'erreur pour afficher le message correspondant.</li>
       <li>Maintenant vous pouvez aller voir l'enregistrement en allant sur la <a href="/subscriptions">page des souscriptions</a></li>
     </ol>
     <p data-notice="info">Malgré la simplicité de ce formulaire, il constitue une bonne base pour commencer et comprendre la logique de programmation.</p>

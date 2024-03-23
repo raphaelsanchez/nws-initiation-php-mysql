@@ -1,5 +1,22 @@
 <?php
 /**
+ * SECURITÉ
+ * ------------------------------
+ * Il n'y a aucune raison de permettre l'accès à ce fichier directement.
+ * C'est pourquoi on va vérifier que la requête est bien une requête POST.
+ * Si ce n'est pas le cas, on redirige l'utilisateur vers la page d'accueil.
+ * 
+ * Pour cela, on utilise la variable superglobale $_SERVER['REQUEST_METHOD'] qui contient la méthode de la requête HTTP
+ * pour vérifier si la méthode est bien "POST".
+ * On compare la valeur de cette variable à 'POST' avec un "if". Si la comparaison est fausse, on redirige l'utilisateur.
+ */
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+  header("Location: /");
+  exit(); // On arrête l'exécution du script après la redirection
+}
+
+
+/**
  * CONNEXION À LA BASE DE DONNÉE
  * ------------------------------
  * Nous devons donc, avant tout, nous connecter à la base de donnée.
@@ -42,7 +59,7 @@ $query = $bdd->prepare("DELETE FROM subscribers WHERE id = :id");
  * Voir : https://www.php.net/manual/fr/reserved.variables.get.php
  */
 $query->execute([
-  "id" => $_GET['id']
+  "id" => $_POST['id']
 ]);
 
 /**
@@ -58,7 +75,7 @@ $query->execute([
  * 
  * Voir : https://www.php.net/manual/fr/function.header.php
  */
-header("Location: /subscriptions/index.php?delete=1");
+header("Location: /subscriptions/?delete=1");
 exit(); // On arrête l'exécution du script après la redirection
 
 /**

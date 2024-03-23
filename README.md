@@ -48,7 +48,7 @@ Il vous suffit de vous laisser guider par les commentaires pour comprendre ce qu
 
 ## Utilisation
 
-### Installation
+### Installation sur LocalWP
 
 1. Ouvrez votre serveur local
 2. Téléchargez le dossier `nws-initiation-php-mysql--starter.zip`
@@ -57,16 +57,38 @@ Il vous suffit de vous laisser guider par les commentaires pour comprendre ce qu
 5. Choisissez un nom pour votre site et cliquez sur `Continue`
 6. Sélectionnez l'option `Preferred` et cliquez sur `Import site`
 7. Cliquez sur `View Site` pour voir votre site
+8. Dans le menu de gauche, cliquez sur `Database` et cliquez sur `Open AdminerEvo`
 
 ... et voilà, votre site est prêt à être utilisé 🚀 !
 
-### Base de données
+### Installation sur une environnement local (MAMP, WAMP, LAMP, etc.)
 
-1. Dans le menu de gauche, Sélectionnez votre site
-2. Dans le volet de droite, cliquez sur `Database`
-3. Dans l'onglet `Database` cliquez sur `Open AdminerEvo`
+Pour vous aider à démarrer, nous avons fourni un fichier `dump.sql.gz` qui contient une base de données avec des données fictives
+correspondant au site que vous allez créer.
 
-... et voilà, vous pouvez maintenant gérer votre base de données 💪 !
+1. Clonez le dépôt dans votre dossier public de votre serveur local (par exemple `/Applications/MAMP/htdocs/`)
+2. Créez une base de données MySQL sur votre serveur local
+3. Ouvrez votre base de données MySQL (Adminer, PhpMyAdmin, etc.)
+4. Créez une nouvelle base de données
+5. Importez le fichier `dump.sql.gz` qui se trouve à la racine dans votre base de données.
+6. Modifiez le fichier `db.php` dans le dossier `includes` avec les informations de votre base de données.
+
+... et voilà, votre site est prêt à être utilisé 🚀 !
+
+### Structure de la base de données
+
+La base de données fournie contient 1 tables :
+
+- `subscribers` : contient les informations des utilisateurs qui se sont inscrits à la newsletter
+
+```sql
+CREATE TABLE `subscribers` (
+  `id` bigint(60) NOT NULL AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+```
 
 ### Structure du projet
 

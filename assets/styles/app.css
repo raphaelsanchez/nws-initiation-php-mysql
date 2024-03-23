@@ -1,0 +1,171 @@
+/**
+* STYLESHEET PRINCIPALE
+*
+* C'est ici que vous pouvez ajouter vos styles personnalisés.
+* Attention toutefois à ne pas trop interférer avec les styles de base de Pico.
+*
+* Cette feuille de style est divisée en 4 sections :
+* - Base:        styles de base
+* - Layout:      styles de mise en page (header, footer, etc.)
+* - Components:  styles des composants (accordions, buttons, etc.)
+* - Utilities:   classes utilitaires (text-center, text-lead, etc.)
+* ------------------------------------------------------------------------------ */
+
+/** 
+ * BASE
+ * Tous les basics sont gérés par Pico, mais vous pouvez les surcharger ici.
+ * ------------------------------------------------------------------------------ */
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+/**
+ * LAYOUT 
+ * Personnalisez la mise en page ici.
+ * ------------------------------------------------------------------------------ */
+html,
+body {
+  min-height: 100%;
+  min-height: 100dvh;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* Header */
+body > header {
+  margin-block-end: 2rem;
+  border-bottom: 1px solid var(--pico-muted-border-color);
+}
+
+/* Footer */
+body > footer {
+  border-top: 1px solid var(--pico-muted-border-color);
+}
+
+body > footer p {
+  margin: 0;
+  font-size: 0.8em;
+  text-align: center;
+  color: var(--pico-muted-color);
+}
+
+/* Main */
+main {
+  max-width: 75ch !important;
+}
+
+main > section {
+  margin-block: 4rem;
+}
+
+/**
+ * COMPONENTS 
+ * Personnalisez les composants de Pico ici. (avec modération)
+ * ------------------------------------------------------------------------------ */
+
+/* Accordions */
+details {
+  padding: 1rem;
+  border: 1px solid var(--pico-muted-border-color);
+}
+
+details > summary {
+  font-size: 1.125rem;
+}
+
+/* Theme toggler */
+button[data-toggle="theme"] {
+  border: none;
+}
+
+button[data-toggle="theme"]:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Notes */
+[data-notice] {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  margin-block: 1rem;
+  border: 1px solid var(--pico-color-slate-50);
+  border-radius: var(--pico-border-radius);
+  font-weight: 500;
+}
+
+[data-notice="info"] {
+  color: var(--pico-color-slate-750);
+  border-color: var(--pico-color-slate-150);
+  background-color: var(--pico-color-slate-50);
+  &::before {
+    content: "ℹ";
+  }
+}
+
+[data-notice="success"] {
+  color: var(--pico-color-green-750);
+  border-color: var(--pico-color-green-150);
+  background-color: var(--pico-color-green-50);
+  &::before {
+    content: "✅";
+  }
+}
+
+[data-notice="warning"] {
+  color: var(--pico-color-amber-750);
+  border-color: var(--pico-color-amber-150);
+  background-color: var(--pico-color-amber-50);
+  &::before {
+    content: "⚠️";
+  }
+}
+
+[data-notice="error"] {
+  color: var(--pico-color-red-750);
+  border-color: var(--pico-color-red-150);
+  background-color: var(--pico-color-red-50);
+  &::before {
+    content: "❌";
+  }
+}
+
+[data-notice] :where(i, svg) {
+  margin-block: auto;
+  margin-inline-start: auto;
+  cursor: pointer;
+}
+
+/**
+ * UTILITIES
+ * les classes dites "utilitaires" sont des classes servant à appliquer des styles
+ * spécifiques à un élément sans avoir à créer une classe CSS dédiée.
+ * ------------------------------------------------------------------------------ */
+
+/* Text */
+.text-center {
+  text-align: center;
+}
+
+.text-lead {
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

@@ -7,6 +7,8 @@
  * Bref, ce n'est pas le sujet de ce cours, mais si vous voulez en savoir plus sur les variables d'environnement en PHP, 
  * consultez la documentation officielle :
  * https://www.php.net/manual/fr/reserved.variables.environment.php
+ * 
+ * @TODO: Créer votre propre fichier .env et ajouter votre clé API Airtable dans la variable AIRTABLE_API_TOKEN.
  */
 function loadEnv($path) {
     if (!file_exists($path)) {

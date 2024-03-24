@@ -1,5 +1,27 @@
 <?php
 /**
+ * LoadEnv function
+ * Normalement, on utilise un package composer comme vlucas/phpdotenv pour charger les variables d'environnement à partir d'un fichier .env.
+ * Mais pour simplifier, on a créé une fonction loadEnv qui charge les variables d'environnement à partir d'un fichier .env.
+ * 
+ * Bref, ce n'est pas le sujet de ce cours, mais si vous voulez en savoir plus sur les variables d'environnement en PHP, 
+ * consultez la documentation officielle :
+ * https://www.php.net/manual/fr/reserved.variables.environment.php
+ */
+function loadEnv($path) {
+    if (!file_exists($path)) {
+        throw new Exception('.env file does not exist');
+    }
+    $lines = file($path, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0) {
+            continue;
+        }
+        list($name, $value) = explode('=', $line, 2);
+        $_ENV[$name] = $value;
+    }
+}
+/**
  * Une classe PHP permet de regrouper des fonctions et des données en un seul objet.
  * 
  * Dans ce cas, nous avons une classe AirTable qui nous permet d'interagir avec l'API Airtable.
@@ -18,17 +40,6 @@
  */
 class AirTable
 {
-    /**
-     * On définit les propriétés de la classe AirTable.
-     *
-     * Commençons par la clé API de l'API Airtable.
-     * Cette clé est utilisée pour authentifier les requêtes à l'API.
-     * Elle est spécifique à chaque utilisateur et doit être gardée secrète.
-     * 
-     * Pour obtenir votre clé API, rendez-vous sur votre compte Airtable et générez une clé API.
-     * https://airtable.com/account
-     */
-    private $apiKey = 'patQAgcKhn7TrZTAU.79578c6f5bf3b64bf34c050a09a22a8ffa9ded20477ea5056ae049e621367c68';
     /**
      * L'ID de la base de données Airtable.
      * Cet ID est utilisé pour identifier la base de données à laquelle accéder.
@@ -74,6 +85,8 @@ class AirTable
      */
     public function __construct(string $baseId, string $tableIdOrName)
     {
+        loadEnv(__DIR__ . '/../.env');
+        $this->apiKey = $_ENV['AIRTABLE_API_TOKEN'];
         $this->baseId = $baseId;
         $this->tableIdOrName = $tableIdOrName;
     }

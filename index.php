@@ -1,56 +1,9 @@
 <?php
-/**
- * INTRODUCTION
- * ------------------------------
- * Bienvenue dans votre premier projet PHP !
- * 
- * Ce projet est une initiation à la programmation web avec PHP et MySQL.
- * Il vous permettra de comprendre les bases de la programmation web et de mettre en pratique vos connaissances.
- * 
- * Il est construit comme un parcours guidé à travers un code complètement documenté et détaillé pas à pas pour vous aider à comprendre 
- * la logique de programmation laissant place à l'expérimentation et à la découverte. Car c'est en pratiquant que l'on apprend le mieux.
- * 
- * Ce projet est divisé en plusieurs parties :
- * - Un formulaire d'inscription à une newsletter
- * - Un système de validation de formulaire en JavaScript
- * - Un traitement de formulaire en PHP
- * - Une connexion à une base de données MySQL
- * - Une redirection après soumission du formulaire
- * 
- * À la fin de ce projet, vous aurez appris à manipuler du PHP, à mettre en place un CRUD (Create, Read, Update, Delete)
- * et à interagir avec une base de données MySQL.
- * 
- * Alors, prêt à coder ? C'est parti ! 🚀
- */
-
-/**
- * PAGE VARIABLES
- * ------------------------------
- * Les variables PHP permettent de stocker des informations qui peuvent être utilisées dans tout le code PHP de la page.
- * 
- * Elles sont définies ici, au début du fichier, pour faciliter la maintenance du code.
- * Ici, nous avons deux variables :
- * - $meta_title : le titre de la page
- * - $meta_description : la description de la page
- * Ces variables sont récupérées dans le fichier "partials/header.php" pour personnaliser le <title> et la  <meta name="description"> de la page.
- */
+// Meta informations
 $meta_title = "Initiation à la programmation web";
 $meta_description = "Premier projet en PHP et MySQL";
 
-/**
- * MESSAGE DE CONFIRMATION OU D'ERREUR
- * ------------------------------
- * Notre page d'accueil est un formulaire d'inscription à une newsletter.
- * Lorsque l'utilisateur soumet le formulaire, un message est affiché en cas d'erreur.
- * Nous allons donc commencer par gérer la condition de ce message en function des paramètres GET de l'URL.
- * 
- * exemple : /?error=already_subscribed
- * 
- * Si la variable $_GET['error'] existe, cela signifie que la page de traitement nous à redirigé vers cette page
- * avec un paramètre "error" dans l'URL pour nous informer d'une erreur lors de l'inscription.
- * 
- * Nous récupérons la valeur de ce paramètre et affichons un message en fonction de la valeur.
- */
+// Message de confirmation ou d'erreur
 if (isset($_GET['error']) && $_GET['error'] === "already_subscribed") {
   $message = "Désolé, vous êtes déjà inscrit avec cette adresse.";
   $message_type = "warning";
@@ -65,22 +18,10 @@ if (isset($_GET['error']) && $_GET['error'] === "already_subscribed") {
   $message_type = null;
 }
 
-/**  
- * INCLUDES
- * ------------------------------
- * En PHP, on sépare notre code en plusieurs fichiers pour le rendre plus lisible et plus facile à maintenir.
- * 
- * Ici, nous incluons le fichier "header.php" qui contient tout le code HTML de l'entête de notre site avec
- * les balises <html>, <head>, <meta>, <title>, <link>, <script> ainsi que la balise d'ouverture <body>.
- * 
- * On utilise la fonction include_once pour inclure le fichier une seule fois.
- * Cela permet d'éviter d'inclure plusieurs fois le même fichier et de générer des erreurs.
- */
+// HEADER
 include_once "partials/header.php"; 
-?> <!-- On ferme ici la balise PHP pour commencer à écrire du HTML -->
+?> 
 
-
-<!-- Oui, bien que ce soit une page PHP, on peut aussi écrire du HTML qui peut aussi contenir du PHP -->
 <main class="container">
   <header>
     <h1>Hello 👋 ! Aujourd'hui on code pour de vrai !!</h1> 
@@ -97,50 +38,13 @@ include_once "partials/header.php";
 
     <article>
       <h3>Inscrivez-vous à notre Newsletter !</h3>
-      <?php 
-        /**
-         * MESSAGE DE CONFIRMATION
-         * ------------------------------
-         * Nous avons défini plus haut un message de confirmation ou d'erreur en fonction des paramètres GET de l'URL.
-         * Donc, si la variable $message existe, cela signifie qu'un message doit être affiché à l'utilisateur.
-         * 
-         * Nous connditionnons donc un message SI la variable $message existe.
-         * On passe la variable $message_type dans data-notice (error, warning, success, info) pour afficher le bon style de message.
-         * (voir assets/styles/app.css pour les styles des messages)
-         * Et on affiche le message dans une balise <p> avec un attribut data-notice pour le style et un attribut data-close pour fermer le message.
-         * 
-         * Vous voyez, c'est simple non ? 😉
-         */
-        if (isset($message)) : ?>
+      <?php if (isset($message)) : ?>
         <p data-notice="<?= $message_type ?>">
           <span><?= $message ?></span>
           <i data-feather="x" data-close></i>
         </p>
       <?php endif; ?>
-      <!--
-        EXEMPLE DE FORMULAIRE:
-        Voici un exemple de formulaire d'inscription à une newsletter qui stock l'adresse email en base de donnée avec la date de soumission. 
-        Il est simple et ne fait pas de vérification de l'adresse email.
-        
-        Voici ce dont il est composé :
-        -> <form> est la balise qui contient tout le formulaire. Il a plusieurs attributs :
-          - un attribut "action" indique le fichier PHP qui va traiter les données du formulaire
-          - un attribut "method" indique la méthode HTTP à utiliser pour envoyer les données. Ici, "POST"
-
-        -> <label> sert à indiquer à l'utilisateur ce qu'il doit saisir dans le champ. Il prend un attribut :
-          - un attribut "for" qui doit correspondre à l'attribut "id" du champ à lier
-
-        -> <input> permet de capturer la saisie de l'utilisateur et possède plusieurs attributs :
-          - un attribut "type" avec la valeur "email" pour que le navigateur vérifie que l'adresse est bien une adresse email
-          - un attribut "name" pour donner un nom à la donnée qui sera envoyée au serveur
-          - un attribut "id" pour le lier a son label qui a un attribut "for" du même nom
-          - un attribut "autocomplete" avec la valeur "off" pour ne pas afficher les suggestions de l'ordinateur
-          - un attribut "placeholder" pour indiquer à l'utilisateur ce qu'il doit saisir
-          - un attribut "required" pour que le navigateur sache que ce champ est obligatoire
-
-        -> <bouton> permet de soumettre le formulaire. Il a un attribut :
-          - un attribut "type" avec la valeur "submit" pour envoyer les données.
-      -->
+      
       <form id="newsletter-form" action="subscriptions/create.php" method="POST">
         <fieldset role="group">
           <label class="sr-only" for="email">Entrez votre adresse email</label>
@@ -148,10 +52,6 @@ include_once "partials/header.php";
           <button type="submit">S'inscrire</button>
         </fieldset>
       </form>
-      <!-- 
-        FIN DE L'EXEMPLE 
-        pour la suite, voir le fichier "subscription/new.php" pour le traitement du formulaire
-      -->
 
     </article>
   </section>

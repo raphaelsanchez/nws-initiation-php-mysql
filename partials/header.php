@@ -1,17 +1,10 @@
 <?php
-/**
- * VARIABLES GLOBALS
- * ------------------------------
- * 
- * Ces variables sont utilisées dans tout le site.
- * Elles sont définies ici, au début du fichier, pour faciliter la maintenance du code.
- * Si on veut changer le titre du site, on le fait ici et il sera automatiquement mis à jour dans le fichier "partials/header.php"
- */
+// Set global meta informations
 $meta_site_name = "NWS";
 $meta_site_description = "Initiation au développement web avec PHP et MySQL";
 $meta_author = "Raphael Sanchez";
 $meta_robot = "index, follow";
-?> <!-- On oublie pas de fermer ici la balise PHP pour commencer à écrire du HTML -->
+?> 
 
 <!DOCTYPE html>
 <html lang="fr" data-theme="light">
@@ -51,8 +44,3 @@ $meta_robot = "index, follow";
     </button>
   </nav>
 </header>
-
-<!-- 
-  Fin du partials/header.php
-  Le reste de notre code se trouve dans la page (ex. index.php) 
--->

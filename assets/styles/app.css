@@ -68,7 +68,11 @@ main > section {
  * COMPONENTS 
  * Personnalisez les composants de Pico ici. (avec modération)
  * ------------------------------------------------------------------------------ */
-
+/* Table container*/
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
 /* Accordions */
 details {
   padding: 1rem;
@@ -87,6 +91,26 @@ button[data-toggle="theme"] {
 button[data-toggle="theme"]:not(:focus-visible) {
   outline: none;
   box-shadow: none;
+}
+
+.onglet1 {
+  background-color: rgb(237, 237, 237);
+  border-radius: 150px;
+  padding: 20px;
+}
+
+.onglet2 {
+  background-color: rgb(237, 237, 237);
+  border-radius: 150px;
+  padding: 20px;
+}
+
+.text1 {
+  color: black;
+}
+
+.text2 {
+  color: black;
 }
 
 /* Notes */

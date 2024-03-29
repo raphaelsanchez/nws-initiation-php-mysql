@@ -83,13 +83,13 @@ include_once "partials/header.php";
 <!-- Oui, bien que ce soit une page PHP, on peut aussi écrire du HTML qui peut aussi contenir du PHP -->
 <main class="container">
   <header>
-    <h1>Hello 👋 ! Aujourd'hui on code pour de vrai !!</h1> 
+    <h1>Coucou Raphael et Olivier !! :)</h1> 
     <p>Le but de l'exercice est de vous faire manipuler un peu de <strong>HTML</strong> de <strong>JS</strong>, de <strong>PHP</strong> et de faire la liaison avec la base de données <strong>MySQL</strong>.</p>
     <p>Je vois déjà des visages se crisper... 😁 ... pas de panique ! L'intégralité du code est commenté, comme une visite guidée à travers le code, pour vous aider dans cette tâche. Et puis vous verrez, que finalement, ce n'est pas si compliqué que ça. Vous pourriez même y prendre goût par accident 😁</p>
   </header>
   
   <section id="exemple">
-    <h2>Exemple avec un simple formulaire</h2>
+    <h2>Merci pour ces deux semaines intenses et riche en émotion ! #oncodepourdevrai</h2>
     <p>
       Dans cet exemple, nous imaginons proposer l'inscription à une liste de diffusion. À la soumission du formulaire, la donnée est stocké en <code>BDD</code> dans la table <code>subscribers</code> puis l'utilisateur est <code>redirigé</code> pour revenir sur cette page.
     </p>
